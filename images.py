@@ -35,6 +35,6 @@ def load():
 	playerImages.append(get_image(playerSheet, [825, 1875, 351, 451]))
 	playerImages.append(get_image(playerSheet, [1225, 1875, 351, 451]))
 
-	scale(playerImages, 0.5)
+	scale(playerImages, 0.25)
 
-	
+
