@@ -2,6 +2,7 @@ from pygame import *
 from math import *
 from random import *
 import images
+from load import *
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -15,7 +16,7 @@ width, height = 1280, 720
 screen = display.set_mode((width, height))
 
 clock = time.Clock() # FPS Clock
-currentScreen = "game" # Keeps track of which screen the user is on
+currentScreen = "menu" # Keeps track of which screen the user is on
 running = True
 tick = 0
 
@@ -32,10 +33,10 @@ class Game:
 
 	def draw_menu(self):
 		screen.fill((50,50,50))
-		# screen.blit(menu, (0, 0))
-		# screen.blit(newGameB, (389, 349))
-		# screen.blit(helpB, (389, 483))
-		# screen.blit(creditsB, (389, 550))
+		screen.blit(menu, (0, 0))
+		screen.blit(play, (389, 349))
+		screen.blit(helpB, (389, 416))
+		screen.blit(creditsB, (389, 483))
 
 	def update_game(self):
 		self.player.update()
@@ -116,9 +117,18 @@ while running:
 				click = True
 				print(click)
 
-	if currentScreen == "menu":
+	if currentScreen == "menu": # When user is on main menu screen
 		g.update_menu()
 		g.draw_menu()
+
+		if playR.collidepoint(mx, my): # Checks mouse collision with button
+			draw.rect(screen, WHITE, playR, 2)
+
+		if helpR.collidepoint(mx, my):
+			draw.rect(screen, WHITE, helpR, 2)
+
+		if creditsR.collidepoint(mx, my):
+			draw.rect(screen, WHITE, creditsR, 2)
 
 	elif currentScreen == "game":
 		g.update_game()
