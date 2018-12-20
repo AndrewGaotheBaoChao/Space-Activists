@@ -11,6 +11,16 @@ def load():
 	playerSheet = image.load('images/character.png')
 	playerImages = []
 	playerImages.append(get_image(playerSheet, [25, 100, 351, 451]))
-	playerImages.append(get_image(playerSheet, [448, 100, 351, 451]))
-	playerImages.append(get_image(playerSheet, [823, 100, 351, 451]))
-	playerImages.append(get_image(playerSheet, [1123, 100, 351, 451]))
+	playerImages.append(get_image(playerSheet, [450, 100, 351, 451]))
+	playerImages.append(get_image(playerSheet, [825, 100, 351, 451]))
+	playerImages.append(get_image(playerSheet, [1125, 100, 351, 451]))
+
+	playerImages.append(get_image(playerSheet, [25, 700, 351, 451]))
+	playerImages.append(get_image(playerSheet, [450, 700, 351, 451]))
+	playerImages.append(get_image(playerSheet, [825, 700, 351, 451]))
+	playerImages.append(get_image(playerSheet, [1125, 700, 351, 451]))
+
+	playerImages.append(get_image(playerSheet, [25, 1275, 351, 451]))
+	playerImages.append(get_image(playerSheet, [450, 1275, 351, 451]))
+	playerImages.append(get_image(playerSheet, [825, 1275, 351, 451]))
+	playerImages.append(get_image(playerSheet, [1125, 1275, 351, 451]))
