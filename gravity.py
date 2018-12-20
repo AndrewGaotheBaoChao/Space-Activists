@@ -15,34 +15,11 @@ screen = display.set_mode((width, height))
 myClock = time.Clock()
 running = True
 
-mode = 'menu'
-offsetX = offsetY = 0
-
-class Player:
-	def __init__(self, x, y):
-		self.x = x
-		self.y = y
-		self.image = Surface((50, 50))
-		self.rect = self.image.get_rect()
-		self.rect.center = self.x, self.y
-
-	def update(self):
-		self.rect.center = self.x, self.y
-
-	def draw(self, surf):
-		draw.rect(surf, GREEN, self.rect)
-
-ox = oy = mx = my = 0
-
 # Actual Game Stuff
 particles = []
 gravPoints = []
 gravPoints.append([width/2, height/2, 50])
 rad = 5
-player = Player(width/2, height/2)
-
-# Menu Stuff
-titleFont = font.SysFont("Poor Richard", 76)
 
 while running:
 	mouseDown = mouseUp = False
