@@ -1,2 +1,3 @@
 # Space-Activists
-A simple game for our english class
+A simple game for our english class, simulating what the world would be like if we didn't know anything about astro physics...
+
