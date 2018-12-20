@@ -32,11 +32,19 @@ class Game:
 		pass
 
 	def draw_menu(self):
-		screen.fill((50,50,50))
 		screen.blit(menu, (0, 0))
-		screen.blit(play, (389, 349))
+		screen.blit(playB, (389, 349))
 		screen.blit(helpB, (389, 416))
 		screen.blit(creditsB, (389, 483))
+
+	def draw_help(self):
+		screen.blit(helpS, (0, 0))
+		screen.blit(backB, (650, 483))
+
+	def draw_credits(self):
+		screen.blit(creditsS, (0, 0))
+		screen.blit(backB, (650, 483))
+
 
 	def update_game(self):
 		self.player.update()
@@ -124,11 +132,39 @@ while running:
 		if playR.collidepoint(mx, my): # Checks mouse collision with button
 			draw.rect(screen, WHITE, playR, 2)
 
+			if click:
+				currentScreen = "game"
+
 		if helpR.collidepoint(mx, my):
 			draw.rect(screen, WHITE, helpR, 2)
 
+			if click:
+				currentScreen = "help"
+
 		if creditsR.collidepoint(mx, my):
 			draw.rect(screen, WHITE, creditsR, 2)
+
+			if click:
+				currentScreen = "credits"
+
+	elif currentScreen == "help":
+		g.draw_help()
+
+		if backR.collidepoint(mx, my):
+			draw.rect(screen, WHITE, backR, 2)
+
+			if click:
+				currentScreen = "menu"
+
+	elif currentScreen == "credits":
+		g.draw_credits()
+
+		if backR.collidepoint(mx, my):
+			draw.rect(screen, WHITE, backR, 2)
+
+			if click:
+				currentScreen = "menu"
+
 
 	elif currentScreen == "game":
 		g.update_game()
