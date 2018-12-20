@@ -21,6 +21,17 @@ while running:
 		elif evt.type == KEYDOWN:
 			if evt.key == K_ESCAPE:
 				running = False
+				
+		elif evt.type == MOUSEBUTTONDOWN:
+			if evt.button == 1: # LEFT CLICK
+				pass
+
+		elif evt.type == MOUSEBUTTONUP:
+			if evt.button == 1: # LEFT CLICK
+				pass
+
+	mx, my = mouse.get_pos()
+	mb = mouse.get_pressed()
 
 	screen.fill(WHITE)
 
