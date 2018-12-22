@@ -28,6 +28,8 @@ class Game:
 
 
 		# Game Stuff
+		self.objects = []
+		self.objects.append(Block(0,0))
 		self.player = Player()
 		self.offset = [0, 0]
 
@@ -49,20 +51,27 @@ class Game:
 		screen.blit(backB, (650, 483))
 
 	def update_pause(self):
-		self.player.update()
+		pass
 
 	def draw_pause(self):
 		screen.fill((100,100,100))
-		p = fonts[0].render("Paused", True, WHITE)
+		p = fonts[1].render("Paused", True, WHITE)
 		pr = p.get_rect()
 		pr.center = width/2, height/2
 		screen.blit(p, pr)
 
 	def update_game(self):
 		self.player.update()
+		for o in self.objects:
+			o.update()
 
 	def draw_game(self):
 		screen.fill((50,50,50))
+		for o in self.objects:
+			x, y = o.rect.topleft
+			x -= self.player.x
+			y -= self.player.y
+			screen.blit(o.image, (x, y))
 		self.player.draw()
 
 class Player:
@@ -71,25 +80,25 @@ class Player:
 		self.image = playerImages[self.index] # holds actual image for animation
 		self.rect = self.image.get_rect()
 		self.rect.center = width/2, height/2
-		self.dir = 'down'
+		self.dir = "down"
 
-		self.x, self.y = 0, 0
+		self.x, self.y = -width/2, -height/2
 		self.vx, self.vy = 0, 0
 
 	def determine_image(self):
-		if self.dir in ['up', 'down']:
+		if self.dir in ["up", "down"]:
 			if self.vy > 0:
 				self.index = 0
 			elif self.vy < 0:
 				self.index = 4
-		elif self.dir in ['right', 'left']:
+		elif self.dir in ["right", "left"]:
 			if self.vx > 0:
 				self.index = 12
 			elif self.vx < 0:
 				self.index = 8
 
 		if self.vx == self.vy == 0:
-			d = ['down','up','left','right']
+			d = ["down","up","left","right"]
 			i = d.index(self.dir) * 4
 			if i == 12: i+=1
 			self.image = playerImages[i]
@@ -100,22 +109,35 @@ class Player:
 		self.vx, self.vy = 0, 0
 		kp = key.get_pressed()
 		if kp[K_RIGHT] or kp[K_d]:
-			self.dir = 'right'
+			self.dir = "right"
 			self.vx = 5
 		if kp[K_LEFT] or kp[K_a]:
-			self.dir = 'left'
+			self.dir = "left"
 			self.vx = -5
 		if kp[K_DOWN] or kp[K_s]:
-			self.dir = 'down'
+			self.dir = "down"
 			self.vy = 5
 		if kp[K_UP] or kp[K_w]:
-			self.dir = 'up'
+			self.dir = "up"
 			self.vy = -5
 
 		self.x += self.vx
 		self.y += self.vy
 
 		self.determine_image()
+
+	def draw(self):
+		screen.blit(self.image, self.rect)
+
+class Block:
+	def __init__(self, x, y):
+		self.x, self.y = x, y
+		self.image = Surface((100,100))
+		self.rect = self.image.get_rect()
+		self.rect.center = self.x, self.y
+
+	def update(self):
+		pass
 
 	def draw(self):
 		screen.blit(self.image, self.rect)
@@ -133,15 +155,14 @@ while running:
 		
 		elif evt.type == KEYDOWN:
 			if evt.key == K_ESCAPE:
-				if currentScreen == 'menu': running = False
-				elif currentScreen == 'pause': running = False
-				elif currentScreen == 'game': currentScreen = 'pause'
+				if currentScreen == "menu": running = False
+				elif currentScreen == "pause": running = False
+				elif currentScreen == "game": currentScreen = "pause"
 
 		# If mouse button is released
 		if evt.type == MOUSEBUTTONUP:
 			if evt.button == 1:
 				click = True
-				print(click)
 
 	if currentScreen == "menu": # When user is on main menu screen
 		g.update_menu()

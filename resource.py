@@ -55,3 +55,4 @@ scale(playerImages, 0.25)
 
 fonts = []
 fonts.append(font.Font("fonts/sao.ttf", 46))
+fonts.append(font.Font("fonts/sao.ttf", 60))
