@@ -29,9 +29,22 @@ class Game:
 
 		# Game Stuff
 		self.objects = []
-		self.objects.append(Block(0,0))
+		# self.objects.append(Block(0,0))
 		self.player = Player()
 		self.offset = [0, 0]
+
+		self.make_level(2)
+
+	def make_level(self, lvl):
+		img = image.load("level/%i.png" % lvl)
+		w, h = img.get_size()
+		s = 50
+		for x in range(w):
+			for y in range(h):
+				c = img.get_at((x, y))
+				print(c)
+				if c == (0,255,0):
+					self.objects.append(Block(x*s, y*s, w=s, h=s, c=c))
 
 	def update_menu(self):
 		pass
@@ -69,8 +82,8 @@ class Game:
 		screen.fill((50,50,50))
 		for o in self.objects:
 			x, y = o.rect.topleft
-			x -= self.player.x
-			y -= self.player.y
+			x -= self.player.x - width/2
+			y -= self.player.y - height/2
 			screen.blit(o.image, (x, y))
 		self.player.draw()
 
@@ -82,7 +95,7 @@ class Player:
 		self.rect.center = width/2, height/2
 		self.dir = "down"
 
-		self.x, self.y = -width/2, -height/2
+		self.x, self.y = 0, 0
 		self.vx, self.vy = 0, 0
 
 	def determine_image(self):
@@ -108,31 +121,35 @@ class Player:
 	def update(self):
 		self.vx, self.vy = 0, 0
 		kp = key.get_pressed()
+		s = 8
 		if kp[K_RIGHT] or kp[K_d]:
 			self.dir = "right"
-			self.vx = 5
-		if kp[K_LEFT] or kp[K_a]:
+			self.vx = s
+		elif kp[K_LEFT] or kp[K_a]:
 			self.dir = "left"
-			self.vx = -5
-		if kp[K_DOWN] or kp[K_s]:
+			self.vx = -s
+		elif kp[K_DOWN] or kp[K_s]:
 			self.dir = "down"
-			self.vy = 5
-		if kp[K_UP] or kp[K_w]:
+			self.vy = s
+		elif kp[K_UP] or kp[K_w]:
 			self.dir = "up"
-			self.vy = -5
+			self.vy = -s
 
 		self.x += self.vx
 		self.y += self.vy
 
 		self.determine_image()
+		if tick % 20 == 0:
+			print(self.x, self.y)
 
 	def draw(self):
 		screen.blit(self.image, self.rect)
 
 class Block:
-	def __init__(self, x, y):
+	def __init__(self, x, y, w=100, h=100, c=(0,0,0)):
 		self.x, self.y = x, y
 		self.image = Surface((100,100))
+		self.image.fill(c)
 		self.rect = self.image.get_rect()
 		self.rect.center = self.x, self.y
 
