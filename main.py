@@ -20,7 +20,7 @@ tick = 0 # Global game tick
 
 class Game:
 	def __init__(self):
-		# Seteup
+		# Setup
 		self.title = "English Project"
 		display.set_caption(self.title)
 
@@ -202,18 +202,18 @@ while running:
 			draw.rect(screen, WHITE, creditsR, 2)
 
 	elif currentScreen == "help":
+		g.draw_help()
 		if backR.collidepoint(mx, my):
 			draw.rect(screen, WHITE, backR, 2)
 			if click:
 				currentScreen = "menu"
-		g.draw_help()
 
 	elif currentScreen == "credits":
+		g.draw_credits()
 		if backR.collidepoint(mx, my):
 			draw.rect(screen, WHITE, backR, 2)
 			if click:
 				currentScreen = "menu"
-		g.draw_credits()
 
 	elif currentScreen == "pause":
 		g.update_pause()
