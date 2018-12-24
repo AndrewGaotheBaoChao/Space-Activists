@@ -25,11 +25,12 @@ class Game:
 		display.set_caption(self.title)
 
 		# Menu Stuff
-
+		# self.resumeR = 
 
 		# Game Stuff
 		self.objects = []
-		# self.objects.append(Block(0,0))
+		self.walls = []
+
 		self.player = Player()
 		self.offset = [0, 0]
 
@@ -41,10 +42,13 @@ class Game:
 		s = 50
 		for x in range(w):
 			for y in range(h):
-				c = img.get_at((x, y))
-				print(c)
-				if c == (0,255,0):
-					self.objects.append(Block(x*s, y*s, w=s, h=s, c=c))
+				col = img.get_at((x, y))[:-1]
+				print(col)
+				if col == (0,255,0):
+					self.objects.append(Block(x*s, y*s, w=s, h=s, c=col))
+				elif col == (0,200,0):
+					print("WALL")
+					self.walls.append(Block(x*s, y*s, w=s, h=s, c=col))
 
 	def update_menu(self):
 		pass
@@ -95,7 +99,7 @@ class Player:
 		self.rect.center = width/2, height/2
 		self.dir = "down"
 
-		self.x, self.y = 0, 0
+		self.x, self.y = 200, 200
 		self.vx, self.vy = 0, 0
 
 	def determine_image(self):
@@ -138,9 +142,13 @@ class Player:
 		self.x += self.vx
 		self.y += self.vy
 
+		for w in g.walls:
+			sx = w.rect.x - self.x - width/2
+			sy = w.rect.y - self.y - height/2
+			if self.rect.colliderect([sx, sy, w.rect.width, w.rect.height]):
+				print("OUCH")
+
 		self.determine_image()
-		if tick % 20 == 0:
-			print(self.x, self.y)
 
 	def draw(self):
 		screen.blit(self.image, self.rect)
@@ -148,7 +156,7 @@ class Player:
 class Block:
 	def __init__(self, x, y, w=100, h=100, c=(0,0,0)):
 		self.x, self.y = x, y
-		self.image = Surface((100,100))
+		self.image = Surface((w, h))
 		self.image.fill(c)
 		self.rect = self.image.get_rect()
 		self.rect.center = self.x, self.y
