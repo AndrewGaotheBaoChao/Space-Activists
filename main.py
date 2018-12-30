@@ -2,15 +2,9 @@ from pygame import *
 from math import *
 from random import *
 from resource import *
-
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-
+from tilemap import *
+from settings import *
 init()
-width, height = 1280, 720
 screen = display.set_mode((width, height))
 
 clock = time.Clock() # FPS Clock
@@ -35,6 +29,14 @@ class Game:
 		self.offset = [0, 0]
 
 		self.make_level(2)
+
+	def load_files(self):
+		self.map = TiledMap("level/map.tmx")
+		self.map = self.map.make_map()
+		self.map_rect = self.img.get_rect()
+
+	def draw(self):
+		self.screen.blit(self.map_image, self.camera)
 
 	def make_level(self, lvl):
 		img = image.load("level/%i.png" % lvl)
@@ -90,6 +92,7 @@ class Game:
 			y -= self.player.y - height/2
 			screen.blit(o.image, (x, y))
 		self.player.draw()
+		self.screen.blit(self.map_image, self.camera)
 
 class Player:
 	def __init__(self):
