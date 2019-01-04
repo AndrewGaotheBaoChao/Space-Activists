@@ -17,40 +17,18 @@ class Game:
 		# Setup
 		self.title = "English Project"
 		display.set_caption(self.title)
-
-		# Menu Stuff
-		# self.resumeR = 
+		self.load_files()
+		self.player = Player()
 
 		# Game Stuff
 		self.objects = []
 		self.walls = []
 
-		self.player = Player()
-		self.offset = [0, 0]
-
-		self.make_level(2)
 
 	def load_files(self):
-		self.map = TiledMap("level/map.tmx")
-		self.map = self.map.make_map()
-		self.map_rect = self.img.get_rect()
-
-	def draw(self):
-		self.screen.blit(self.map_image, self.camera)
-
-	def make_level(self, lvl):
-		img = image.load("level/%i.png" % lvl)
-		w, h = img.get_size()
-		s = 50
-		for x in range(w):
-			for y in range(h):
-				col = img.get_at((x, y))[:-1]
-				print(col)
-				if col == (0,255,0):
-					self.objects.append(Block(x*s, y*s, w=s, h=s, c=col))
-				elif col == (0,200,0):
-					print("WALL")
-					self.walls.append(Block(x*s, y*s, w=s, h=s, c=col))
+		self.map = TiledMap("level/level1.tmx")
+		self.camera = Camera(self.map.width, self.map.height)
+		# self.map_rect = self.img.get_rect()
 
 	def update_menu(self):
 		pass
@@ -83,23 +61,26 @@ class Game:
 		self.player.update()
 		for o in self.objects:
 			o.update()
+		self.camera.update(self.player)
 
 	def draw_game(self):
 		screen.fill((50,50,50))
+		mapimg = self.map.make_map()
+		maprect = mapimg.get_rect()
+		screen.blit(mapimg, self.camera.apply_rect(maprect))
 		for o in self.objects:
 			x, y = o.rect.topleft
 			x -= self.player.x - width/2
 			y -= self.player.y - height/2
 			screen.blit(o.image, (x, y))
-		self.player.draw()
-		self.screen.blit(self.map_image, self.camera)
+		screen.blit(self.player.image, self.camera.apply(self.player))
 
 class Player:
 	def __init__(self):
 		self.index = 0 # keeps track of what image to blit in animation
 		self.image = playerImages[self.index] # holds actual image for animation
 		self.rect = self.image.get_rect()
-		self.rect.center = width/2, height/2
+		self.rect.center = 0, 0
 		self.dir = "down"
 
 		self.x, self.y = 200, 200
@@ -144,6 +125,7 @@ class Player:
 
 		self.x += self.vx
 		self.y += self.vy
+		self.rect.center = self.x, self.y
 
 		for w in g.walls:
 			sx = w.rect.x - self.x - width/2
