@@ -26,7 +26,7 @@ class Game:
 
 
 	def load_files(self):
-		self.map = TiledMap("level/level1.tmx")
+		self.map = TiledMap("level/map.tmx")
 		self.camera = Camera(self.map.width, self.map.height)
 		# self.map_rect = self.img.get_rect()
 
