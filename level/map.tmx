@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="4">
  <tileset firstgid="1" source="C:/Users/aggao/Desktop/PkmnBlackWhiteSet.tsx"/>
  <layer id="10" name="ground" width="50" height="50">
   <data encoding="csv">
@@ -379,4 +379,7 @@
 0,0,835,836,0,0,835,836,0,0,835,836,0,0,835,836,0,0,835,836,0,0,0,836,0,0,0,836,0,0,835,836,0,0,835,836,0,0,835,836,0,0,0,836,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="18" name="walls">
+  <object id="2" name="wall" x="128" y="1312" width="1408" height="32"/>
+ </objectgroup>
 </map>

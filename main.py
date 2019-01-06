@@ -4,6 +4,9 @@ from random import *
 from resource import *
 from tilemap import *
 from settings import *
+import sys
+
+sys.stderr = open('errorlog.txt', 'w') # making a txt file to record all errors
 init()
 screen = display.set_mode((width, height))
 
@@ -29,6 +32,11 @@ class Game:
 		self.map = TiledMap("level/map.tmx")
 		self.camera = Camera(self.map.width, self.map.height)
 		# self.map_rect = self.img.get_rect()
+
+		for t in self.map.tmxdata.objects: # goes into tilemap file and looks for every instance of wall
+			if t.name == "wall":
+				Wall(self, t.x, t.y, t.width, t.height) # make the wall
+
 
 	def update_menu(self):
 		pass
@@ -82,8 +90,7 @@ class Player:
 		self.rect = self.image.get_rect()
 		self.rect.center = 0, 0
 		self.dir = "down"
-
-		self.x, self.y = 200, 200
+		self.x, self.y = 200, 1000
 		self.vx, self.vy = 0, 0
 
 	def determine_image(self):
@@ -128,15 +135,26 @@ class Player:
 		self.rect.center = self.x, self.y
 
 		for w in g.walls:
-			sx = w.rect.x - self.x - width/2
-			sy = w.rect.y - self.y - height/2
+			sx = w.rect.x - self.x - width / 2
+			sy = w.rect.y - self.y - height / 2
 			if self.rect.colliderect([sx, sy, w.rect.width, w.rect.height]):
-				print("OUCH")
+				self.vx, self.vy = 0, 0
 
 		self.determine_image()
 
 	def draw(self):
 		screen.blit(self.image, self.rect)
+
+class Wall:
+    def __init__(self, game, x, y, w, h):
+        self.groups = game.walls
+        self.game = game
+        self.rect = Rect(x, y, w, h)
+        self.hit_rect = self.rect
+        self.x = x
+        self.y = y
+        self.rect.x = x
+        self.rect.y = y
 
 class Block:
 	def __init__(self, x, y, w=100, h=100, c=(0,0,0)):
@@ -220,4 +238,6 @@ while running:
 	clock.tick(60) # FPS
 	tick = (tick + 1) % (60*120) # global game tick counter, resetting after 120 seconds
 
+sys.stderr.close()
+sys.stderr = sys.__stderr__
 quit()
