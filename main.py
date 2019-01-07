@@ -6,6 +6,12 @@ from tilemap import *
 from settings import *
 import sys
 
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+
 sys.stderr = open('errorlog.txt', 'w') # making a txt file to record all errors
 init()
 screen = display.set_mode((width, height))
@@ -73,7 +79,7 @@ class Game:
 
 	def draw_game(self):
 		screen.fill((50,50,50))
-		mapimg = self.map.make_map()
+		mapimg = self.map.make_map(self.camera.camera)
 		maprect = mapimg.get_rect()
 		screen.blit(mapimg, self.camera.apply_rect(maprect))
 		for o in self.objects:
@@ -82,6 +88,8 @@ class Game:
 			y -= self.player.y - height/2
 			screen.blit(o.image, (x, y))
 		screen.blit(self.player.image, self.camera.apply(self.player))
+		for w in self.map.walls:
+			draw.rect(screen, BLACK, self.camera.apply_rect(w), 5)
 
 class Player:
 	def __init__(self):
@@ -116,7 +124,9 @@ class Player:
 	def update(self):
 		self.vx, self.vy = 0, 0
 		kp = key.get_pressed()
-		s = 8
+		if kp[K_LSHIFT]: s = 16
+		else: s = 8
+
 		if kp[K_RIGHT] or kp[K_d]:
 			self.dir = "right"
 			self.vx = s
@@ -134,27 +144,26 @@ class Player:
 		self.y += self.vy
 		self.rect.center = self.x, self.y
 
-		for w in g.walls:
-			sx = w.rect.x - self.x - width / 2
-			sy = w.rect.y - self.y - height / 2
-			if self.rect.colliderect([sx, sy, w.rect.width, w.rect.height]):
-				self.vx, self.vy = 0, 0
+		### COLLISIONS ###
+		for w in g.map.walls:
+			if self.rect.colliderect(w):
+				if abs(self.vx) != 0:
+					if self.vx > 0:
+						self.rect.right = w[0]
+					else:
+						self.rect.left = w[0] + w[2]
+					self.x = self.rect.centerx
+				if abs(self.vy) != 0:
+					if self.vy > 0:
+						self.rect.bottom = w[1]
+					else:
+						self.rect.top = w[1] + w[3]
+					self.y = self.rect.centery
 
 		self.determine_image()
 
 	def draw(self):
 		screen.blit(self.image, self.rect)
-
-class Wall:
-    def __init__(self, game, x, y, w, h):
-        self.groups = game.walls
-        self.game = game
-        self.rect = Rect(x, y, w, h)
-        self.hit_rect = self.rect
-        self.x = x
-        self.y = y
-        self.rect.x = x
-        self.rect.y = y
 
 class Block:
 	def __init__(self, x, y, w=100, h=100, c=(0,0,0)):
