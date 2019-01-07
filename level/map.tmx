@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="4">
- <tileset firstgid="1" source="C:/Users/aggao/Desktop/PkmnBlackWhiteSet.tsx"/>
+ <tileset firstgid="1" source="../images/PkmnBlackWhiteSet.tsx"/>
  <layer id="10" name="ground" width="50" height="50">
   <data encoding="csv">
 11,10,2,10,2,11,2,9,2,3,1,6612,6613,11,9,9,2,6613,6614,6942,6943,6944,6612,6613,2,6613,6613,6613,6613,6613,6613,6613,6613,6613,6613,6613,6613,6613,6613,6613,6613,6613,6614,11,1,1,1,11,11,3,

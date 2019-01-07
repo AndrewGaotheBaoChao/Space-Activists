@@ -29,13 +29,13 @@ class Game:
 
 
 	def load_files(self):
-		self.map = TiledMap("level/map.tmx")
+		self.map = TiledMap("level/map.tmx") 
 		self.camera = Camera(self.map.width, self.map.height)
 		# self.map_rect = self.img.get_rect()
 
-		for t in self.map.tmxdata.objects: # goes into tilemap file and looks for every instance of wall
-			if t.name == "wall":
-				Wall(self, t.x, t.y, t.width, t.height) # make the wall
+		#for t in self.map.tmxdata.objects: # goes into tilemap file and looks for every instance of wall
+			#if t.name == "wall":
+			#	Wall(self, t.x, t.y, t.width, t.height) # make the wall
 
 
 	def update_menu(self):
