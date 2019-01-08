@@ -33,16 +33,13 @@ class Game:
 		self.objects = []
 		self.walls = []
 
-
 	def load_files(self):
 		self.map = TiledMap("level/map.tmx") 
 		self.camera = Camera(self.map.width, self.map.height)
-		# self.map_rect = self.img.get_rect()
+		self.npcs = []
 
-		#for t in self.map.tmxdata.objects: # goes into tilemap file and looks for every instance of wall
-			#if t.name == "wall":
-			#	Wall(self, t.x, t.y, t.width, t.height) # make the wall
-
+		for n in self.map.npcs:
+			npcs.append(NPC(n[0], n[1], n[2]))
 
 	def update_menu(self):
 		pass
@@ -165,19 +162,15 @@ class Player:
 	def draw(self):
 		screen.blit(self.image, self.rect)
 
-class Block:
-	def __init__(self, x, y, w=100, h=100, c=(0,0,0)):
-		self.x, self.y = x, y
-		self.image = Surface((w, h))
-		self.image.fill(c)
-		self.rect = self.image.get_rect()
-		self.rect.center = self.x, self.y
+class NPC:
+	def __init__(self, x, y, t):
+		# Get the right skins for the type (t)
+		# self.images = 
+		self.rect.center = x, y
 
 	def update(self):
+		# Rotate towards the player
 		pass
-
-	def draw(self):
-		screen.blit(self.image, self.rect)
 
 g = Game()
 
