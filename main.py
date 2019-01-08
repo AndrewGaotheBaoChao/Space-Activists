@@ -30,7 +30,6 @@ class Game:
 		self.player = Player(self)
 
 		# Game Stuff
-		self.objects = []
 		self.walls = []
 
 	def load_files(self):
@@ -39,7 +38,7 @@ class Game:
 		self.npcs = []
 
 		for n in self.map.npcs:
-			npcs.append(NPC(n[0], n[1], n[2]))
+			self.npcs.append(NPC(n[0], n[1], n[2]))
 
 	def update_menu(self):
 		pass
@@ -70,8 +69,6 @@ class Game:
 
 	def update_game(self):
 		self.player.update()
-		for o in self.objects:
-			o.update()
 		self.camera.update(self.player)
 
 	def draw_game(self):
@@ -79,19 +76,20 @@ class Game:
 		mapimg = self.map.make_map(self.camera.camera)
 		maprect = mapimg.get_rect()
 		screen.blit(mapimg, self.camera.apply_rect(maprect))
-		for o in self.objects:
-			x, y = o.rect.topleft
-			x -= self.player.x - width/2
-			y -= self.player.y - height/2
-			screen.blit(o.image, (x, y))
+		for n in self.npcs:
+			x, y = n.rect.topleft
+			x += self.camera.camera.x
+			y += self.camera.camera.y
+			screen.blit(n.image, (x, y))
 		screen.blit(self.player.image, self.camera.apply(self.player))
 		for w in self.map.walls:
-			draw.rect(screen, BLACK, self.camera.apply_rect(w), 5)
+			draw.rect(screen, BLACK, self.camera.apply_rect(w), 1)
 
 class Player:
 	def __init__(self, g):
 		self.index = 0 # keeps track of what image to blit in animation
-		self.image = playerImages[self.index] # holds actual image for animation
+		self.images = playerImages
+		self.image = self.images[self.index] # holds actual image for animation
 		self.rect = self.image.get_rect()
 		self.rect.center = g.map.player_spawn
 		self.dir = "down"
@@ -114,9 +112,9 @@ class Player:
 			d = ["down","up","left","right"]
 			i = d.index(self.dir) * 4
 			if i == 12: i+=1
-			self.image = playerImages[i]
+			self.image = self.images[i]
 		else:
-			self.image = playerImages[self.index + (int(tick/5) % 4)]
+			self.image = self.images[self.index + (int(tick/5) % 4)]
 
 	def update(self):
 		self.vx, self.vy = 0, 0
@@ -165,7 +163,9 @@ class Player:
 class NPC:
 	def __init__(self, x, y, t):
 		# Get the right skins for the type (t)
-		# self.images = 
+		self.images = npcImages[t]
+		self.image = self.images[0]
+		self.rect = self.image.get_rect()
 		self.rect.center = x, y
 
 	def update(self):
@@ -188,6 +188,11 @@ while running:
 				if currentScreen == "menu": running = False
 				elif currentScreen == "pause": running = False
 				elif currentScreen == "game": currentScreen = "pause"
+			if evt.key == K_SPACE:
+				if currentScreen == "pause": currentScreen = "game"
+
+		elif evt.type == KEYUP:
+			pass
 
 		# If mouse button is released
 		if evt.type == MOUSEBUTTONUP:
