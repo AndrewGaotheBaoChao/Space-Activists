@@ -27,7 +27,7 @@ class Game:
 		self.title = "English Project"
 		display.set_caption(self.title)
 		self.load_files()
-		self.player = Player()
+		self.player = Player(self)
 
 		# Game Stuff
 		self.objects = []
@@ -92,13 +92,13 @@ class Game:
 			draw.rect(screen, BLACK, self.camera.apply_rect(w), 5)
 
 class Player:
-	def __init__(self):
+	def __init__(self, g):
 		self.index = 0 # keeps track of what image to blit in animation
 		self.image = playerImages[self.index] # holds actual image for animation
 		self.rect = self.image.get_rect()
-		self.rect.center = 0, 0
+		self.rect.center = g.map.player_spawn
 		self.dir = "down"
-		self.x, self.y = 200, 1000
+		self.x, self.y = g.map.player_spawn
 		self.vx, self.vy = 0, 0
 
 	def determine_image(self):

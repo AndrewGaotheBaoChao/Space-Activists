@@ -22,11 +22,15 @@ class TiledMap:
 		self.tmxdata = tm
 
 		self.walls = []
+		self.player_spawn = [0, 0]
 
 		for t in tm.visible_layers:
 			if isinstance(t, pytmx.TiledObjectGroup):
-				for wall in t:
-					self.walls.append(Rect(wall.x, wall.y, wall.width, wall.height))
+				for obj in t:
+					if obj.name == "wall":
+						self.walls.append(Rect(obj.x, obj.y, obj.width, obj.height))
+					elif obj.name == "spawn":
+						self.player_spawn = [obj.x, obj.y]
 
 	def render_area(self, surface, rect):
 		ti = self.tmxdata.get_tile_image_by_gid
