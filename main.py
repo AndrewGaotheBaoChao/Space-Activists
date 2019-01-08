@@ -27,22 +27,19 @@ class Game:
 		self.title = "English Project"
 		display.set_caption(self.title)
 		self.load_files()
-		self.player = Player()
+		self.player = Player(self)
 
 		# Game Stuff
 		self.objects = []
 		self.walls = []
 
-
 	def load_files(self):
 		self.map = TiledMap("level/map.tmx") 
 		self.camera = Camera(self.map.width, self.map.height)
-		# self.map_rect = self.img.get_rect()
+		self.npcs = []
 
-		#for t in self.map.tmxdata.objects: # goes into tilemap file and looks for every instance of wall
-			#if t.name == "wall":
-			#	Wall(self, t.x, t.y, t.width, t.height) # make the wall
-
+		for n in self.map.npcs:
+			npcs.append(NPC(n[0], n[1], n[2]))
 
 	def update_menu(self):
 		pass
@@ -92,13 +89,13 @@ class Game:
 			draw.rect(screen, BLACK, self.camera.apply_rect(w), 5)
 
 class Player:
-	def __init__(self):
+	def __init__(self, g):
 		self.index = 0 # keeps track of what image to blit in animation
 		self.image = playerImages[self.index] # holds actual image for animation
 		self.rect = self.image.get_rect()
-		self.rect.center = 0, 0
+		self.rect.center = g.map.player_spawn
 		self.dir = "down"
-		self.x, self.y = 200, 1000
+		self.x, self.y = g.map.player_spawn
 		self.vx, self.vy = 0, 0
 
 	def determine_image(self):
@@ -165,19 +162,15 @@ class Player:
 	def draw(self):
 		screen.blit(self.image, self.rect)
 
-class Block:
-	def __init__(self, x, y, w=100, h=100, c=(0,0,0)):
-		self.x, self.y = x, y
-		self.image = Surface((w, h))
-		self.image.fill(c)
-		self.rect = self.image.get_rect()
-		self.rect.center = self.x, self.y
+class NPC:
+	def __init__(self, x, y, t):
+		# Get the right skins for the type (t)
+		# self.images = 
+		self.rect.center = x, y
 
 	def update(self):
+		# Rotate towards the player
 		pass
-
-	def draw(self):
-		screen.blit(self.image, self.rect)
 
 g = Game()
 
