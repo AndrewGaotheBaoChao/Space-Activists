@@ -33,8 +33,7 @@ class TiledMap:
 					elif obj.name == "spawn":
 						self.player_spawn = [obj.x, obj.y]
 					elif obj.name == "npc":
-						self.npcs.append([obj.x, obj.y, int(obj.type)])
-		print(self.npcs)
+						self.npcs.append(obj)
 
 	def render_area(self, surface, rect):
 		ti = self.tmxdata.get_tile_image_by_gid

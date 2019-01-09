@@ -15,6 +15,7 @@ BLUE = (0, 0, 255)
 sys.stderr = open('errorlog.txt', 'w') # making a txt file to record all errors
 init()
 screen = display.set_mode((width, height))
+screen_copy = screen.copy()
 
 clock = time.Clock() # FPS Clock
 currentScreen = "menu" # Keeps track of which screen the user is on
@@ -38,7 +39,7 @@ class Game:
 		self.npcs = []
 
 		for n in self.map.npcs:
-			self.npcs.append(NPC(n[0], n[1], n[2]))
+			self.npcs.append(NPC(n))
 
 	def update_menu(self):
 		pass
@@ -69,21 +70,29 @@ class Game:
 
 	def update_game(self):
 		self.player.update()
-		self.camera.update(self.player)
+		if not self.player.talking:
+			for n in self.npcs:
+				n.update(self)
+			self.camera.update(self.player)
 
 	def draw_game(self):
 		screen.fill((50,50,50))
-		mapimg = self.map.make_map(self.camera.camera)
-		maprect = mapimg.get_rect()
-		screen.blit(mapimg, self.camera.apply_rect(maprect))
-		for n in self.npcs:
-			x, y = n.rect.topleft
-			x += self.camera.camera.x
-			y += self.camera.camera.y
-			screen.blit(n.image, (x, y))
-		screen.blit(self.player.image, self.camera.apply(self.player))
-		for w in self.map.walls:
-			draw.rect(screen, BLACK, self.camera.apply_rect(w), 1)
+		if self.player.talking and self.player.talking_to != None:
+			screen.blit(self.player.background, (0, 0))
+			self.player.talking_to.talk()
+			draw.rect(screen, GREEN, self.camera.apply_rect(self.player.talking_to.rect), 5)
+		else:
+			mapimg = self.map.make_map(self.camera.camera)
+			maprect = mapimg.get_rect()
+			screen.blit(mapimg, self.camera.apply_rect(maprect))
+			for n in self.npcs:
+				x, y = n.rect.topleft
+				x += self.camera.camera.x
+				y += self.camera.camera.y
+				screen.blit(n.image, (x, y))
+			screen.blit(self.player.image, self.camera.apply(self.player))
+			for w in self.map.walls:
+				draw.rect(screen, BLACK, self.camera.apply_rect(w), 1)
 
 class Player:
 	def __init__(self, g):
@@ -93,8 +102,11 @@ class Player:
 		self.rect = self.image.get_rect()
 		self.rect.center = g.map.player_spawn
 		self.dir = "down"
+		self.mode = "moving"
 		self.x, self.y = g.map.player_spawn
 		self.vx, self.vy = 0, 0
+		self.talking = False
+		self.talking_to = None
 
 	def determine_image(self):
 		if self.dir in ["up", "down"]:
@@ -154,6 +166,12 @@ class Player:
 					else:
 						self.rect.top = w[1] + w[3]
 					self.y = self.rect.centery
+		if not self.talking:
+			for n in g.npcs:
+				if self.rect.colliderect(n.rect) and interact:
+					self.background = screen_copy
+					self.talking = True
+					self.talking_to = n
 
 		self.determine_image()
 
@@ -161,23 +179,62 @@ class Player:
 		screen.blit(self.image, self.rect)
 
 class NPC:
-	def __init__(self, x, y, t):
+	def __init__(self, obj):
 		# Get the right skins for the type (t)
-		self.images = npcImages[t]
+		self.images = npcImages[int(obj.type)]
 		self.image = self.images[0]
 		self.rect = self.image.get_rect()
-		self.rect.center = x, y
+		self.rect.center = obj.x, obj.y
+		self.dialogue = obj.dialogue.split(" # ")
+		print(self.dialogue)
+		self.index = 0
+		self.page = 0
+		self.delay = 0
+		self.delayMax = 3
 
-	def update(self):
+	def update(self, g):
 		# Rotate towards the player
 		pass
 
+	def talk(self):
+		print(self.delay, self.index, self.page)
+		if self.index < len(self.dialogue[self.page]):
+			self.delay += 1
+		if advance:
+			if self.index < len(self.dialogue[self.page]):
+				self.index = len(self.dialogue[self.page]) - 1
+			else:
+				self.delay, self.index = 0, 0
+				if self.page < len(self.dialogue) - 1:
+					self.page += 1
+				else:
+					self.page = 0
+					g.player.talking = False
+					return
+		if self.delay >= self.delayMax:
+			self.delay = 0
+			self.index += 1
+
+		txt = self.dialogue[self.page][0:self.index]
+		w = width-100
+		boxR = Rect((width-w)/2, height - 200, w, 190)
+		draw.rect(screen, (255,255,180), boxR)
+		draw.rect(screen, BLACK, boxR, 2)
+		pos = boxR.x + 20, boxR.y + 20
+		text_render = mul_lines(fonts[1], txt, w - 40)
+		screen.blit(text_render, pos)
+
+interact = False
+click = False
+advance = False
 g = Game()
 
 while running:
 	mx, my = mouse.get_pos()  # Mouse location
 	mb = mouse.get_pressed()  # Mouse click status
 	click = False  # Resets mouse click so that it only counts as one click
+	interact = False
+	advance = False
 
 	for evt in event.get():
 		if evt.type == QUIT:
@@ -192,7 +249,10 @@ while running:
 				if currentScreen == "pause": currentScreen = "game"
 
 		elif evt.type == KEYUP:
-			pass
+			if evt.key == K_e:
+				interact = True
+			if evt.key == K_SPACE:
+				advance = True
 
 		# If mouse button is released
 		if evt.type == MOUSEBUTTONUP:
@@ -242,6 +302,7 @@ while running:
 		g.draw_game()
 
 	display.flip()
+	screen_copy = screen.copy()
 	clock.tick(60) # FPS
 	tick = (tick + 1) % (60*120) # global game tick counter, resetting after 120 seconds
 

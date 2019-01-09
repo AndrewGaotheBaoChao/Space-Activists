@@ -273,8 +273,16 @@
  </layer>
  <objectgroup id="18" name="walls">
   <object id="2" name="spawn" x="632" y="437.333" width="48" height="32"/>
-  <object id="9" name="npc" type="1" x="545" y="928" width="28" height="30"/>
-  <object id="10" name="npc" type="2" x="450" y="929" width="28" height="30"/>
+  <object id="9" name="npc" type="1" x="545" y="928" width="28" height="30">
+   <properties>
+    <property name="dialogue" value="Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... # Testing again..."/>
+   </properties>
+  </object>
+  <object id="10" name="npc" type="2" x="450" y="929" width="28" height="30">
+   <properties>
+    <property name="dialogue" value="Shit... # SHIT..."/>
+   </properties>
+  </object>
   <object id="12" name="wall" x="997.333" y="924.667" width="154.667" height="245.333"/>
   <object id="13" name="wall" x="1349.33" y="694.667" width="248" height="476"/>
   <object id="14" name="wall" x="708" y="674" width="500" height="130.666"/>

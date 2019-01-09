@@ -3,6 +3,29 @@ from pygame import *
 init()
 font.init()
 
+# font, text, width
+def mul_lines(f, t, wid, f_color=(0,0,0)):
+	lines = []
+	while f.size(t)[0] > wid:
+		pos = len(t)
+		while f.size(t[0:pos])[0] > wid:
+			pos = t.rfind(' ', 0, pos)
+			if pos == -1:
+				continue
+		lines.append(t[0:pos])
+		t = t[pos+1:]
+	lines.append(t)
+
+	totHeight = f.size(lines[0])[1] * len(lines)
+	surf = Surface((wid, totHeight), SRCALPHA)
+	surf.fill((0,0,0,0))
+	for p in range(len(lines)):
+		lineFont = f.render(lines[p], True, f_color)
+		lineFontRect = lineFont.get_rect()
+		lineFontRect.topleft = 0, p * lineFont.get_height()
+		surf.blit(lineFont, lineFontRect)
+	return surf
+
 def get_image(sheet, pos):
 	img = Surface((pos[2],pos[3]), SRCALPHA)
 	img.fill((255,255,255,0))
@@ -30,8 +53,10 @@ creditsR = Rect(389, 483, 502, 58)
 backR = Rect(650, 483, 502, 58)
 
 fonts = []
-fonts.append(font.Font("fonts/sao.ttf", 46))
 fonts.append(font.Font("fonts/sao.ttf", 60))
+fonts.append(font.Font("fonts/sao.ttf", 46))
+fonts.append(font.Font("fonts/sao.ttf", 36))
+fonts.append(font.Font("fonts/sao.ttf", 20))
 
 playerSheet = image.load('images/character_alpha.png')
 playerImages = []
