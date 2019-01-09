@@ -224,6 +224,14 @@ class NPC:
 		text_render = mul_lines(fonts[1], txt, w - 40)
 		screen.blit(text_render, pos)
 
+		if self.index == len(self.dialogue[self.page]) - 1:
+			print("DONE")
+			if (tick%120) / 60 < 1:
+				i = fonts[1].render("➡", BLACK, True)
+				r = i.get_rect()
+				r.bottomright = boxR.right - 20, boxR.bottom - 20
+				screen.blit(i, r)
+
 interact = False
 click = False
 advance = False
