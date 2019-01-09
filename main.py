@@ -185,8 +185,8 @@ class NPC:
 		self.image = self.images[0]
 		self.rect = self.image.get_rect()
 		self.rect.center = obj.x, obj.y
+
 		self.dialogue = obj.dialogue.split(" # ")
-		print(self.dialogue)
 		self.index = 0
 		self.page = 0
 		self.delay = 0
@@ -196,12 +196,63 @@ class NPC:
 		# Rotate towards the player
 		pass
 
+	# def speech(self, interact, text, speech): # when player interacts with the npc, display text and update rotation
+	# 	self.interact = interact
+	# 	self.speech = speech  # this is the list that stores what the npc will say to you
+	# 	self.text = text
+	# 	self.txtN = 0 # keeps track of which paragraphs of text to display
+	# 	self.sent = "" # text displayed when talking to npc
+	# 	self.stop = 0 # this is just to stop it from running forever
+	# 	self.s = 100  # It causes a buffering effect for the text when a new line is started as the position of the text would start more to the left and not be centered
+
+	# 	if self.interact:
+	# 		while self.text:
+	# 			for evt in event.get():
+	# 				if evt.type == QUIT:
+	# 					self.display_text = False
+	# 					self.disp = False
+	# 			kp = key.get_pressed()
+	# 			screen.blit(textbox, (0, 0))
+	# 			screen.blit(npcFont.render(self.name + ":", True, (0, 0, 0), (45, 30)))
+	# 			self.split = self.speech[0].split("//")
+
+	# 			if kp[K_KP_ENTER]:
+	# 				if self.txtN < len(self.split) - 1 and self.stop == 1:
+	# 					self.prog += 1
+	# 					self.stop = 0
+	# 					self.sent = ''
+	# 					self.text_y = 60
+	# 			# Ends interaction
+	# 			self.text = False
+	# 			self.interact = False
+
+	# 	if self.stop == 0:
+	# 		for i in self.split[self.txtN]:
+	# 			# this will loop through the string for the npc
+	# 			self.sent += i  # this will add it to self.sent and that will be blit on screen
+	# 			if i == '#':  # this is for the text to start another line
+	# 				self.sent = ''
+	# 				self.s = 0
+	# 				self.text_y += 30  # increases position
+	# 				time.wait(650)  # adds a delay
+	# 			if self.s <= 1:
+	# 				self.s += 1  # this will be like a buffer
+	# 				self.sent = ''
+	# 			else:
+	# 				self.s = 100
+	# 			# blits the letters in a one by one animation
+	# 			screen.blit(npcFont.render(self.sent, True, (0, 0, 0)), (45, self.text_y))
+	# 			display.flip()
+	# 			time.wait(35)
+
+	# 	self.n = 1
+
 	def talk(self):
-		print(self.delay, self.index, self.page)
-		if self.index < len(self.dialogue[self.page]):
+		# print(self.delay, self.index, self.page)
+		if self.index < len(self.dialogue[self.page]) - 1:
 			self.delay += 1
 		if advance:
-			if self.index < len(self.dialogue[self.page]):
+			if self.index < len(self.dialogue[self.page]) - 1:
 				self.index = len(self.dialogue[self.page]) - 1
 			else:
 				self.delay, self.index = 0, 0
@@ -215,7 +266,7 @@ class NPC:
 			self.delay = 0
 			self.index += 1
 
-		txt = self.dialogue[self.page][0:self.index]
+		txt = self.dialogue[self.page][0:self.index+1]
 		w = width-100
 		boxR = Rect((width-w)/2, height - 200, w, 190)
 		draw.rect(screen, (255,255,180), boxR)
@@ -225,9 +276,8 @@ class NPC:
 		screen.blit(text_render, pos)
 
 		if self.index == len(self.dialogue[self.page]) - 1:
-			print("DONE")
-			if (tick%120) / 60 < 1:
-				i = fonts[1].render("➡", BLACK, True)
+			if (tick%20) / 10 < 1:
+				i = fonts[1].render("---->", True, BLACK)
 				r = i.get_rect()
 				r.bottomright = boxR.right - 20, boxR.bottom - 20
 				screen.blit(i, r)

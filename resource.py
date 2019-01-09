@@ -58,6 +58,9 @@ fonts.append(font.Font("fonts/sao.ttf", 46))
 fonts.append(font.Font("fonts/sao.ttf", 36))
 fonts.append(font.Font("fonts/sao.ttf", 20))
 
+npcFont = font.SysFont("Lato", 24)
+textbox = image.load("images/textbox.png")
+
 playerSheet = image.load('images/character_alpha.png')
 playerImages = []
 playerImages.append(get_image(playerSheet, [25, 100, 351, 451]))
@@ -80,7 +83,7 @@ playerImages.append(get_image(playerSheet, [425, 1875, 351, 451]))
 playerImages.append(get_image(playerSheet, [825, 1875, 351, 451]))
 playerImages.append(get_image(playerSheet, [1225, 1875, 351, 451]))
 
-scale(playerImages, 0.18)
+scale(playerImages, 0.12)
 
 npcImages = [[]]
 
@@ -91,7 +94,7 @@ npc1.append(get_image(npcSheet, [7, 2, 18, 31]))
 npc1.append(get_image(npcSheet, [7, 66, 18, 31]))
 npc1.append(get_image(npcSheet, [7, 98, 18, 31]))
 
-scale(npc1, 3)
+scale(npc1, 2)
 npcImages.append(npc1)
 
 npcSheet = image.load('images/npcs/c2.png')
@@ -101,5 +104,5 @@ npc2.append(get_image(npcSheet, [6, 5, 20, 27]))
 npc2.append(get_image(npcSheet, [6, 37, 20, 27]))
 npc2.append(transform.flip(npc2[2], True, False))
 
-scale(npc2, 3)
+scale(npc2, 2)
 npcImages.append(npc2)

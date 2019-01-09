@@ -275,7 +275,7 @@
   <object id="2" name="spawn" x="632" y="437.333" width="48" height="32"/>
   <object id="9" name="npc" type="1" x="545" y="928" width="28" height="30">
    <properties>
-    <property name="dialogue" value="Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... Test123... # Testing again..."/>
+    <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
    </properties>
   </object>
   <object id="10" name="npc" type="2" x="450" y="929" width="28" height="30">
