@@ -58,7 +58,6 @@ fonts.append(font.Font("fonts/sao.ttf", 46))
 fonts.append(font.Font("fonts/sao.ttf", 36))
 fonts.append(font.Font("fonts/sao.ttf", 20))
 
-npcFont = font.SysFont("Lato", 24)
 textbox = image.load("images/textbox.png")
 
 playerSheet = image.load('images/character_alpha.png')
@@ -93,7 +92,6 @@ npc1.append(get_image(npcSheet, [7, 34, 18, 31]))
 npc1.append(get_image(npcSheet, [7, 2, 18, 31]))
 npc1.append(get_image(npcSheet, [7, 66, 18, 31]))
 npc1.append(get_image(npcSheet, [7, 98, 18, 31]))
-
 scale(npc1, 2)
 npcImages.append(npc1)
 
@@ -103,6 +101,68 @@ npc2.append(get_image(npcSheet, [70, 5, 20, 27]))
 npc2.append(get_image(npcSheet, [6, 5, 20, 27]))
 npc2.append(get_image(npcSheet, [6, 37, 20, 27]))
 npc2.append(transform.flip(npc2[2], True, False))
-
 scale(npc2, 2)
 npcImages.append(npc2)
+
+npcSheet = image.load('images/npcs/c3.png')
+npc3 = []
+npc3.append(get_image(npcSheet, [70, 5, 20, 27]))
+npc3.append(get_image(npcSheet, [6, 5, 20, 27]))
+npc3.append(get_image(npcSheet, [6, 37, 20, 27]))
+npc3.append(transform.flip(npc3[2], True, False))
+scale(npc3, 2)
+npcImages.append(npc3)
+
+npcSheet = image.load('images/npcs/c4.png')
+npc4 = []
+npc4.append(get_image(npcSheet, [70, 5, 20, 27]))
+npc4.append(get_image(npcSheet, [6, 5, 20, 27]))
+npc4.append(get_image(npcSheet, [6, 37, 20, 27]))
+npc4.append(transform.flip(npc4[2], True, False))
+scale(npc4, 2)
+npcImages.append(npc4)
+
+npcSheet = image.load('images/npcs/c5.png')
+npc5 = []
+npc5.append(get_image(npcSheet, [70, 5, 20, 27]))
+npc5.append(get_image(npcSheet, [6, 5, 20, 27]))
+npc5.append(get_image(npcSheet, [6, 37, 20, 27]))
+npc5.append(transform.flip(npc5[2], True, False))
+scale(npc5, 2)
+npcImages.append(npc5)
+
+npcSheet = image.load('images/npcs/c6.png')
+npc6 = []
+npc6.append(get_image(npcSheet, [70, 5, 20, 27]))
+npc6.append(get_image(npcSheet, [6, 5, 20, 27]))
+npc6.append(get_image(npcSheet, [6, 37, 20, 27]))
+npc6.append(transform.flip(npc6[2], True, False))
+scale(npc6, 2)
+npcImages.append(npc6)
+
+npcSheet = image.load('images/npcs/c7.png')
+npc7 = []
+npc7.append(get_image(npcSheet, [70, 5, 20, 27]))
+npc7.append(get_image(npcSheet, [6, 5, 20, 27]))
+npc7.append(get_image(npcSheet, [6, 37, 20, 27]))
+npc7.append(transform.flip(npc7[2], True, False))
+scale(npc7, 2)
+npcImages.append(npc7)
+
+npcSheet = image.load('images/npcs/c8.png')
+npc8 = []
+npc8.append(get_image(npcSheet, [70, 5, 20, 27]))
+npc8.append(get_image(npcSheet, [6, 5, 20, 27]))
+npc8.append(get_image(npcSheet, [6, 37, 20, 27]))
+npc8.append(transform.flip(npc8[2], True, False))
+scale(npc8, 2)
+npcImages.append(npc8)
+
+npcSheet = image.load('images/npcs/c8.png')
+npc9 = []
+npc9.append(get_image(npcSheet, [70, 5, 20, 27]))
+npc9.append(get_image(npcSheet, [6, 5, 20, 27]))
+npc9.append(get_image(npcSheet, [6, 37, 20, 27]))
+npc9.append(transform.flip(npc9[2], True, False))
+scale(npc9, 2)
+npcImages.append(npc9)
