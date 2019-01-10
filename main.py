@@ -190,7 +190,7 @@ class NPC:
 		self.index = 0
 		self.page = 0
 		self.delay = 0
-		self.delayMax = 3
+		self.delayMax = 2
 
 	def update(self, g):
 		# Rotate towards the player
@@ -248,12 +248,15 @@ class NPC:
 	# 	self.n = 1
 
 	def talk(self):
-		# print(self.delay, self.index, self.page)
+		# Continue scrolling as there us still text to be revealed
 		if self.index < len(self.dialogue[self.page]) - 1:
 			self.delay += 1
+		# If user clicks space
 		if advance:
+			# if there is still text to be revealed, reveal if all
 			if self.index < len(self.dialogue[self.page]) - 1:
 				self.index = len(self.dialogue[self.page]) - 1
+			# otherwise, go to next page / exit if last page
 			else:
 				self.delay, self.index = 0, 0
 				if self.page < len(self.dialogue) - 1:
@@ -266,18 +269,23 @@ class NPC:
 			self.delay = 0
 			self.index += 1
 
+		# the text so far (srolled)
 		txt = self.dialogue[self.page][0:self.index+1]
+		# width for the speech box at the bottom of the screen
 		w = width-100
+		# Speech box
 		boxR = Rect((width-w)/2, height - 200, w, 190)
+		# Drawing the box
 		draw.rect(screen, (255,255,180), boxR)
 		draw.rect(screen, BLACK, boxR, 2)
 		pos = boxR.x + 20, boxR.y + 20
 		text_render = mul_lines(fonts[1], txt, w - 40)
 		screen.blit(text_render, pos)
 
-		if self.index == len(self.dialogue[self.page]) - 1:
+		# If the page is done
+		if self.index >= len(self.dialogue[self.page]) - 1:
 			if (tick%20) / 10 < 1:
-				i = fonts[1].render("---->", True, BLACK)
+				i = fonts[1].render("-->", True, BLACK)
 				r = i.get_rect()
 				r.bottomright = boxR.right - 20, boxR.bottom - 20
 				screen.blit(i, r)
