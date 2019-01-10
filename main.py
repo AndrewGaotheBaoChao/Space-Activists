@@ -196,61 +196,11 @@ class NPC:
 		# Rotate towards the player
 		pass
 
-	# def speech(self, interact, text, speech): # when player interacts with the npc, display text and update rotation
-	# 	self.interact = interact
-	# 	self.speech = speech  # this is the list that stores what the npc will say to you
-	# 	self.text = text
-	# 	self.txtN = 0 # keeps track of which paragraphs of text to display
-	# 	self.sent = "" # text displayed when talking to npc
-	# 	self.stop = 0 # this is just to stop it from running forever
-	# 	self.s = 100  # It causes a buffering effect for the text when a new line is started as the position of the text would start more to the left and not be centered
-
-	# 	if self.interact:
-	# 		while self.text:
-	# 			for evt in event.get():
-	# 				if evt.type == QUIT:
-	# 					self.display_text = False
-	# 					self.disp = False
-	# 			kp = key.get_pressed()
-	# 			screen.blit(textbox, (0, 0))
-	# 			screen.blit(npcFont.render(self.name + ":", True, (0, 0, 0), (45, 30)))
-	# 			self.split = self.speech[0].split("//")
-
-	# 			if kp[K_KP_ENTER]:
-	# 				if self.txtN < len(self.split) - 1 and self.stop == 1:
-	# 					self.prog += 1
-	# 					self.stop = 0
-	# 					self.sent = ''
-	# 					self.text_y = 60
-	# 			# Ends interaction
-	# 			self.text = False
-	# 			self.interact = False
-
-	# 	if self.stop == 0:
-	# 		for i in self.split[self.txtN]:
-	# 			# this will loop through the string for the npc
-	# 			self.sent += i  # this will add it to self.sent and that will be blit on screen
-	# 			if i == '#':  # this is for the text to start another line
-	# 				self.sent = ''
-	# 				self.s = 0
-	# 				self.text_y += 30  # increases position
-	# 				time.wait(650)  # adds a delay
-	# 			if self.s <= 1:
-	# 				self.s += 1  # this will be like a buffer
-	# 				self.sent = ''
-	# 			else:
-	# 				self.s = 100
-	# 			# blits the letters in a one by one animation
-	# 			screen.blit(npcFont.render(self.sent, True, (0, 0, 0)), (45, self.text_y))
-	# 			display.flip()
-	# 			time.wait(35)
-
-	# 	self.n = 1
-
 	def talk(self):
 		# Continue scrolling as there us still text to be revealed
 		if self.index < len(self.dialogue[self.page]) - 1:
 			self.delay += 1
+
 		# If user clicks space
 		if advance:
 			# if there is still text to be revealed, reveal if all
@@ -275,9 +225,12 @@ class NPC:
 		w = width-100
 		# Speech box
 		boxR = Rect((width-w)/2, height - 200, w, 190)
+
 		# Drawing the box
-		draw.rect(screen, (255,255,180), boxR)
-		draw.rect(screen, BLACK, boxR, 2)
+		screen.blit(textbox, (0, 0))
+		#draw.rect(screen, (255,255,180), boxR)
+		#draw.rect(screen, BLACK, boxR, 2)
+
 		pos = boxR.x + 20, boxR.y + 20
 		text_render = mul_lines(fonts[1], txt, w - 40)
 		screen.blit(text_render, pos)
