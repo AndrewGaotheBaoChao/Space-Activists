@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="62">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="69">
  <tileset firstgid="1" source="../images/PkmnBlackWhiteSet.tsx"/>
  <layer id="10" name="ground" width="50" height="50">
   <data encoding="csv">
@@ -386,7 +386,7 @@
     <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
    </properties>
   </object>
-  <object id="10" name="npc" type="2" x="448" y="928" width="32" height="32">
+  <object id="10" name="npc" type="1" x="448" y="928" width="32" height="32">
    <properties>
     <property name="dialogue" value="Good afternoon everybody! # My name is Mrs. Lozo, and today we will be doing the tugboat challenge... # and you will fail!"/>
    </properties>
@@ -456,7 +456,7 @@
     <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
    </properties>
   </object>
-  <object id="45" name="npc" type="3" x="160" y="1248" width="32" height="32">
+  <object id="45" name="npc" type="1" x="160" y="1248" width="32" height="32">
    <properties>
     <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
    </properties>
@@ -480,5 +480,40 @@
   <object id="59" name="wall" x="0" y="832" width="112" height="480"/>
   <object id="60" name="wall" x="48" y="640" width="488" height="24"/>
   <object id="61" name="wall" x="576" y="640" width="32" height="224"/>
+  <object id="62" name="npc" type="2" x="224" y="1249.33" width="32" height="32">
+   <properties>
+    <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
+   </properties>
+  </object>
+  <object id="63" name="npc" type="3" x="288" y="1249.33" width="32" height="32">
+   <properties>
+    <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
+   </properties>
+  </object>
+  <object id="64" name="npc" type="4" x="354.333" y="1247.67" width="32" height="32">
+   <properties>
+    <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
+   </properties>
+  </object>
+  <object id="65" name="npc" type="5" x="419.333" y="1249.67" width="32" height="32">
+   <properties>
+    <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
+   </properties>
+  </object>
+  <object id="66" name="npc" type="6" x="482.333" y="1248.67" width="32" height="32">
+   <properties>
+    <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
+   </properties>
+  </object>
+  <object id="67" name="npc" type="7" x="546.333" y="1248.67" width="32" height="32">
+   <properties>
+    <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
+   </properties>
+  </object>
+  <object id="68" name="npc" type="8" x="612.333" y="1248.67" width="32" height="32">
+   <properties>
+    <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
