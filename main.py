@@ -134,18 +134,19 @@ class Player:
 		if kp[K_LSHIFT]: s = 16
 		else: s = 8
 
-		if kp[K_RIGHT] or kp[K_d]:
-			self.dir = "right"
-			self.vx = s
-		elif kp[K_LEFT] or kp[K_a]:
-			self.dir = "left"
-			self.vx = -s
-		elif kp[K_DOWN] or kp[K_s]:
-			self.dir = "down"
-			self.vy = s
-		elif kp[K_UP] or kp[K_w]:
-			self.dir = "up"
-			self.vy = -s
+		if not self.talking:
+			if kp[K_RIGHT] or kp[K_d]:
+				self.dir = "right"
+				self.vx = s
+			elif kp[K_LEFT] or kp[K_a]:
+				self.dir = "left"
+				self.vx = -s
+			elif kp[K_DOWN] or kp[K_s]:
+				self.dir = "down"
+				self.vy = s
+			elif kp[K_UP] or kp[K_w]:
+				self.dir = "up"
+				self.vy = -s
 
 		self.x += self.vx
 		self.y += self.vy
@@ -262,7 +263,7 @@ while running:
 		elif evt.type == KEYDOWN:
 			if evt.key == K_ESCAPE:
 				if currentScreen == "menu": running = False
-				elif currentScreen == "pause": running = False
+				elif currentScreen == "pause": currentScreen = "game"
 				elif currentScreen == "game": currentScreen = "pause"
 			if evt.key == K_SPACE:
 				if currentScreen == "pause": currentScreen = "game"
