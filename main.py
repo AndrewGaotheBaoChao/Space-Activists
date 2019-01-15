@@ -27,19 +27,19 @@ class Game:
 		# Setup
 		self.title = "English Project"
 		display.set_caption(self.title)
-		self.load_files()
-		self.player = Player(self)
+		self.load_files("level/map.tmx")
 
 		# Game Stuff
 		self.walls = []
 
-	def load_files(self):
-		self.map = TiledMap("level/map.tmx") 
+	def load_files(self, map_file):
+		self.map = TiledMap(map_file) 
 		self.camera = Camera(self.map.width, self.map.height)
 		self.npcs = []
 
 		for n in self.map.npcs:
 			self.npcs.append(NPC(n))
+		self.player = Player(self)
 
 	def update_menu(self):
 		pass
