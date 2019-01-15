@@ -380,7 +380,7 @@
 </data>
  </layer>
  <objectgroup id="18" name="walls">
-  <object id="2" name="spawn" x="632" y="437.333" width="48" height="32"/>
+  <object id="2" name="spawn" x="1226.67" y="168" width="48" height="32"/>
   <object id="9" name="npc" type="1" x="544" y="928" width="32" height="32">
    <properties>
     <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>

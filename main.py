@@ -229,8 +229,6 @@ class NPC:
 
 		# Drawing the box
 		screen.blit(textbox, (0, 0))
-		#draw.rect(screen, (255,255,180), boxR)
-		#draw.rect(screen, BLACK, boxR, 2)
 
 		pos = boxR.x + 20, boxR.y + 20
 		text_render = mul_lines(fonts[1], txt, w - 40)
@@ -249,6 +247,9 @@ click = False
 advance = False
 g = Game()
 
+introText = "One night, you go to sleep, thinking it's just a normal night # You wake up the next morning, realising something is wrong # So you go outside...".split(" # ")
+introCounter = 0
+
 while running:
 	mx, my = mouse.get_pos()  # Mouse location
 	mb = mouse.get_pressed()  # Mouse click status
@@ -262,11 +263,14 @@ while running:
 		
 		elif evt.type == KEYDOWN:
 			if evt.key == K_ESCAPE:
-				if currentScreen == "menu": running = False
+				if currentScreen in ["menu", "intro"]: running = False
 				elif currentScreen == "pause": currentScreen = "game"
 				elif currentScreen == "game": currentScreen = "pause"
 			if evt.key == K_SPACE:
-				if currentScreen == "pause": currentScreen = "game"
+				if currentScreen == "pause": running = False
+				elif currentScreen == "intro":
+					introCounter = 0
+					currentScreen = "game"
 
 		elif evt.type == KEYUP:
 			if evt.key == K_e:
@@ -287,7 +291,7 @@ while running:
 			draw.rect(screen, WHITE, playR, 2)
 
 			if click:
-				currentScreen = "game"
+				currentScreen = "intro"
 
 		if helpR.collidepoint(mx, my):
 			if click:
@@ -320,6 +324,28 @@ while running:
 	elif currentScreen == "game":
 		g.update_game()
 		g.draw_game()
+
+	elif currentScreen == "intro":
+		screen.fill(BLACK)
+		# The length of time (in ticks) for each sentence of the intro
+		# 60 = 1 second
+		length = 180
+		introCounter += 1
+		page = int(introCounter / length)
+		if page < len(introText):
+			i = introCounter % length
+			c = 255
+			if i < length/4:
+				c = i/(length/4) * 255
+			elif length-i < length/4:
+				c = (length-i)/(length/4) * 255
+			txt = introText[page]
+			txtImg = fonts[0].render(txt, True, (c, c, c))
+			txtRect = txtImg.get_rect()
+			txtRect.center = width/2, height/2
+			screen.blit(txtImg, txtRect)
+		else:
+			currentScreen = "game"
 
 	display.flip()
 	screen_copy = screen.copy()
