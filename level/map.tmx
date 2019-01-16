@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="71">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="72">
  <tileset firstgid="1" source="../images/PkmnBlackWhiteSet.tsx"/>
  <layer id="10" name="ground" width="50" height="50">
   <data encoding="csv">
@@ -424,6 +424,12 @@
   <object id="70" name="portal" x="1211.33" y="505.333" width="94.6663" height="46.6667">
    <properties>
     <property name="location" value="lab"/>
+   </properties>
+  </object>
+  <object id="71" name="npc" type="1" x="640.667" y="193" width="28" height="30">
+   <properties>
+    <property name="dialogue" value="\Hey Dad. Have you seen my phone? # Sure, I have it right here... # \Hey! What happened to the camera? # Camera? On your phone? What're you talking about? I've never seen such a big peripheral on such a small device before!"/>
+    <property name="npc_name" value="Dad"/>
    </properties>
   </object>
  </objectgroup>

@@ -37,6 +37,7 @@ class Game:
 		self.portals = []
 
 		for n in self.map.npcs:
+			print(n.dialogue)
 			self.npcs.append(NPC(n))
 		for p in self.map.portals:
 			self.portals.append(Portal(p))
