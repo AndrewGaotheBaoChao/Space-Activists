@@ -215,11 +215,11 @@ class NPC:
 		dy = g.player.rect.centery - self.rect.centery
 		ang = degrees(atan2(dy, dx))
 		if ang < 0: ang += 360
-		if 45 < ang < 135:
+		if 45 <= ang < 135:
 			self.dir = "down"
-		elif 135 < ang < 225:
+		elif 135 <= ang < 225:
 			self.dir = "left"
-		elif 225 < ang < 315:
+		elif 225 <= ang < 315:
 			self.dir = "up"
 		else:
 			self.dir = "right"
