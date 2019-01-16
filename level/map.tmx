@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="69">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="71">
  <tileset firstgid="1" source="../images/PkmnBlackWhiteSet.tsx"/>
  <layer id="10" name="ground" width="50" height="50">
   <data encoding="csv">
@@ -421,5 +421,10 @@
   <object id="59" name="wall" x="0" y="832" width="112" height="480"/>
   <object id="60" name="wall" x="48" y="640" width="488" height="24"/>
   <object id="61" name="wall" x="576" y="640" width="32" height="224"/>
+  <object id="70" name="portal" x="1211.33" y="505.333" width="94.6663" height="46.6667">
+   <properties>
+    <property name="location" value="lab"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

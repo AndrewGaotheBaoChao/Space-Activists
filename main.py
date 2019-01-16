@@ -29,16 +29,17 @@ class Game:
 		display.set_caption(self.title)
 		self.load_files("level/map.tmx")
 
-		# Game Stuff
-		self.walls = []
-
 	def load_files(self, map_file):
 		self.map = TiledMap(map_file) 
 		self.camera = Camera(self.map.width, self.map.height)
 		self.npcs = []
+		self.walls = []
+		self.portals = []
 
 		for n in self.map.npcs:
 			self.npcs.append(NPC(n))
+		for p in self.map.portals:
+			self.portals.append(Portal(p))
 		self.player = Player(self)
 
 	def update_menu(self):
@@ -86,10 +87,10 @@ class Game:
 			maprect = mapimg.get_rect()
 			screen.blit(mapimg, self.camera.apply_rect(maprect))
 			for n in self.npcs:
-				x, y = n.rect.topleft
-				x += self.camera.camera.x
-				y += self.camera.camera.y
-				screen.blit(n.image, (x, y))
+				screen.blit(n.image, self.camera.apply_rect(n.rect))
+			for p in self.portals:
+				draw.rect(screen, BLUE, self.camera.apply_rect(p.rect), 2)
+
 			screen.blit(self.player.image, self.camera.apply(self.player))
 			for w in self.map.walls:
 				draw.rect(screen, BLACK, self.camera.apply_rect(w), 1)
@@ -173,6 +174,9 @@ class Player:
 					self.background = screen_copy
 					self.talking = True
 					self.talking_to = n
+			for p in g.portals:
+				if self.rect.colliderect(p.rect):
+					g.load_files(p.path)
 
 		self.determine_image()
 
@@ -250,7 +254,7 @@ class NPC:
 		screen.blit(textbox, (0, 0))
 
 		pos = boxR.x + 20, boxR.y + 20
-		text_render = mul_lines(fonts[1], txt, w - 40)
+		text_render = mul_lines(fonts[1], txt, w - 40, align="left")
 		screen.blit(text_render, pos)
 
 		# If the page is done
@@ -261,6 +265,10 @@ class NPC:
 				r.bottomright = boxR.right - 20, boxR.bottom - 20
 				screen.blit(i, r)
 
+class Portal:
+	def __init__(self, obj):
+		self.rect = Rect(obj.x, obj.y, obj.width, obj.height)
+		self.path = "level/" + obj.location + ".tmx"
 interact = False
 click = False
 advance = False

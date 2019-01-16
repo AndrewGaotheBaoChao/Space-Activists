@@ -24,6 +24,7 @@ class TiledMap:
 		self.walls = []
 		self.player_spawn = [0, 0]
 		self.npcs = []
+		self.portals = []
 
 		for t in tm.visible_layers:
 			if isinstance(t, pytmx.TiledObjectGroup):
@@ -34,6 +35,8 @@ class TiledMap:
 						self.player_spawn = [obj.x, obj.y]
 					elif obj.name == "npc":
 						self.npcs.append(obj)
+					elif obj.name == "portal":
+						self.portals.append(obj)
 
 	def render_area(self, surface, rect):
 		ti = self.tmxdata.get_tile_image_by_gid

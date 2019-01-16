@@ -4,7 +4,7 @@ init()
 font.init()
 
 # font, text, width
-def mul_lines(f, t, wid, f_color=(0,0,0)):
+def mul_lines(f, t, wid, f_color=(0,0,0), align="left"):
 	lines = []
 	while f.size(t)[0] > wid:
 		pos = len(t)
@@ -22,7 +22,8 @@ def mul_lines(f, t, wid, f_color=(0,0,0)):
 	for p in range(len(lines)):
 		lineFont = f.render(lines[p], True, f_color)
 		lineFontRect = lineFont.get_rect()
-		lineFontRect.topleft = 0, p * lineFont.get_height()
+		if align == "left": lineFontRect.topleft = 0, p * lineFont.get_height()
+		elif align == "center": lineFontRect.midtop = wid/2, p * lineFont.get_height()
 		surf.blit(lineFont, lineFontRect)
 	return surf
 
