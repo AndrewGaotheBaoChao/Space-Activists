@@ -178,6 +178,8 @@ class Player:
 			for p in g.portals:
 				if self.rect.colliderect(p.rect):
 					g.load_files(p.path)
+					if p.co:
+						player.rect.center = p.co
 
 		self.determine_image()
 
@@ -278,6 +280,10 @@ class Portal:
 	def __init__(self, obj):
 		self.rect = Rect(obj.x, obj.y, obj.width, obj.height)
 		self.path = "level/" + obj.location + ".tmx"
+		try:
+			self.co = obj.co.split(",")
+			self.co = [int(self.co[0]), int(self.co[1])]
+		except: self.co = []
 interact = False
 click = False
 advance = False
