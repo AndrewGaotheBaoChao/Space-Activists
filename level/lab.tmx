@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="25" nextobjectid="96">
+ <properties>
+  <property name="small" value="1"/>
+ </properties>
  <tileset firstgid="1" source="../images/PkmnBlackWhiteSet.tsx"/>
  <tileset firstgid="7841" source="../images/4th_gen_indoor_tileset_by_akizakura16_dac0c2w.tsx"/>
  <layer id="21" name="ground" width="25" height="25" opacity="0.82">
