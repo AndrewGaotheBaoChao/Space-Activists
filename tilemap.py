@@ -20,7 +20,7 @@ class TiledMap:
 		self.width = tm.width * tm.tilewidth
 		self.height = tm.height * tm.tileheight
 		self.tmxdata = tm
-		try: self.small = tm.small
+		try: self.small = bool(int(tm.small))
 		except: self.small = False
 
 		self.walls = []

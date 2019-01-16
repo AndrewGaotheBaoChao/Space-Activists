@@ -84,7 +84,6 @@ class Game:
 			# draw.rect(screen, GREEN, self.camera.apply_rect(self.player.talking_to.rect), 5)
 		else:
 			r = Rect(-(self.camera.camera.x), -(self.camera.camera.y), width, height)
-			print(r)
 			mapimg = self.map.make_map(r)
 			maprect = mapimg.get_rect()
 			screen.blit(mapimg, self.camera.apply_rect(maprect))
@@ -193,8 +192,13 @@ class NPC:
 		self.rect = self.image.get_rect()
 		self.rect.center = obj.x, obj.y
 
-		self.name = obj.npc_name
-		self.dialogue = obj.dialogue.split(" # ")
+		# Just in case we forget to add npc_name in map file
+		try: self.name = obj.npc_name
+		except: self.name = "UNKNOWN"
+
+		try: self.dialogue = obj.dialogue.split(" # ")
+		except: self.dialogue = []
+
 		for i in range(len(self.dialogue)):
 			if self.dialogue[i][0] == "\\":
 				self.dialogue[i] = "ME: " + self.dialogue[i][1:]
@@ -222,6 +226,10 @@ class NPC:
 		self.image = self.images["down up left right".split(" ").index(self.dir)]
 
 	def talk(self):
+		if not self.dialogue:
+			g.player.talking = False
+			return
+
 		# Continue scrolling as there us still text to be revealed
 		if self.index < len(self.dialogue[self.page]) - 1:
 			self.delay += 1
