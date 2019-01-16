@@ -29,14 +29,15 @@ class TiledMap:
 		for t in tm.visible_layers:
 			if isinstance(t, pytmx.TiledObjectGroup):
 				for obj in t:
-					if obj.name == "wall":
-						self.walls.append(Rect(obj.x, obj.y, obj.width, obj.height))
-					elif obj.name == "spawn":
-						self.player_spawn = [obj.x, obj.y]
-					elif obj.name == "npc":
-						self.npcs.append(obj)
-					elif obj.name == "portal":
-						self.portals.append(obj)
+					if obj.visible:
+						if obj.name == "wall":
+							self.walls.append(Rect(obj.x, obj.y, obj.width, obj.height))
+						elif obj.name == "spawn":
+							self.player_spawn = [obj.x, obj.y]
+						elif obj.name == "npc":
+							self.npcs.append(obj)
+						elif obj.name == "portal":
+							self.portals.append(obj)
 
 	def render_area(self, surface, rect):
 		ti = self.tmxdata.get_tile_image_by_gid
