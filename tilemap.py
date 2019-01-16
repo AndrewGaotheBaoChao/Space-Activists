@@ -20,6 +20,8 @@ class TiledMap:
 		self.width = tm.width * tm.tilewidth
 		self.height = tm.height * tm.tileheight
 		self.tmxdata = tm
+		try: self.small = tm.small
+		except: self.small = False
 
 		self.walls = []
 		self.player_spawn = [0, 0]
@@ -45,7 +47,8 @@ class TiledMap:
 		for layer in self.tmxdata.visible_layers:
 			if isinstance(layer, pytmx.TiledTileLayer):
 				for x, y, gid in layer:
-					if rect.colliderect((self.tmxdata.width-x-1)*tw, (self.tmxdata.height-y-1)*th, tw, th):
+					r = Rect(x*tw, y*th, tw, th)
+					if rect.colliderect(r):
 						tile = ti(gid)
 						if tile:
 							surface.blit(tile, (x * self.tmxdata.tilewidth, y * self.tmxdata.tileheight))
@@ -70,13 +73,14 @@ class Camera:
 	def apply_rect(self, rect):
 		return rect.move(self.camera.topleft)
 
-	def update(self, target):
+	def update(self, target, small):
 		x = -target.rect.centerx + int(width / 2)
 		y = -target.rect.centery + int(height / 2)
 
-		# limit scrolling to map size
-		x = min(0, x)  # left
-		y = min(0, y)  # top
-		x = max(-(self.width - width), x)  # right
-		y = max(-(self.height - height), y)  # bottom
+		if not small:
+			# limit scrolling to map size
+			x = min(0, x)  # left
+			y = min(0, y)  # top
+			x = max(-(self.width - width), x)  # right
+			y = max(-(self.height - height), y)  # bottom
 		self.camera = Rect(x, y, self.width, self.height)

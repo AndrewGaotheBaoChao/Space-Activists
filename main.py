@@ -37,7 +37,6 @@ class Game:
 		self.portals = []
 
 		for n in self.map.npcs:
-			print(n.dialogue)
 			self.npcs.append(NPC(n))
 		for p in self.map.portals:
 			self.portals.append(Portal(p))
@@ -75,7 +74,7 @@ class Game:
 		if not self.player.talking:
 			for n in self.npcs:
 				n.update(self)
-			self.camera.update(self.player)
+			self.camera.update(self.player, self.map.small)
 
 	def draw_game(self):
 		screen.fill((50,50,50))
@@ -84,7 +83,9 @@ class Game:
 			self.player.talking_to.talk()
 			# draw.rect(screen, GREEN, self.camera.apply_rect(self.player.talking_to.rect), 5)
 		else:
-			mapimg = self.map.make_map(self.camera.camera)
+			r = Rect(-(self.camera.camera.x), -(self.camera.camera.y), width, height)
+			print(r)
+			mapimg = self.map.make_map(r)
 			maprect = mapimg.get_rect()
 			screen.blit(mapimg, self.camera.apply_rect(maprect))
 			for n in self.npcs:
@@ -218,7 +219,6 @@ class NPC:
 			self.dir = "up"
 		else:
 			self.dir = "right"
-		print(ang)
 		self.image = self.images["down up left right".split(" ").index(self.dir)]
 
 	def talk(self):
@@ -303,7 +303,7 @@ while running:
 		elif evt.type == KEYUP:
 			if evt.key == K_e:
 				interact = True
-			if evt.key == K_SPACE:
+			elif evt.key == K_SPACE:
 				advance = True
 
 		# If mouse button is released

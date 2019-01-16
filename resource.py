@@ -160,7 +160,7 @@ npc8.append(transform.flip(npc8[2], True, False))
 scale(npc8, npcScale)
 npcImages.append(npc8)
 
-npcSheet = image.load('images/npcs/c8.png')
+npcSheet = image.load('images/npcs/c9.png')
 npc9 = []
 npc9.append(get_image(npcSheet, [70, 5, 20, 27]))
 npc9.append(get_image(npcSheet, [6, 5, 20, 27]))
@@ -168,3 +168,12 @@ npc9.append(get_image(npcSheet, [6, 37, 20, 27]))
 npc9.append(transform.flip(npc9[2], True, False))
 scale(npc9, npcScale)
 npcImages.append(npc9)
+
+npcSheet = image.load('images/npcs/c10.png')
+npc10 = []
+npc10.append(get_image(npcSheet, [7, 35, 18, 28]))
+npc10.append(get_image(npcSheet, [7, 3, 18, 28]))
+npc10.append(get_image(npcSheet, [7, 67, 19, 28]))
+npc10.append(transform.flip(npc10[2], True, False))
+scale(npc10, npcScale)
+npcImages.append(npc10)
