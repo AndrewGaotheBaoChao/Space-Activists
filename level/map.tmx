@@ -432,7 +432,6 @@
     <property name="npc_name" value="Dad"/>
    </properties>
   </object>
-  <object id="72" name="npc" type="10" x="1007.33" y="193" width="28" height="30"/>
   <object id="73" name="npc" type="11" x="451.333" y="545" width="28" height="30">
    <properties>
     <property name="dialogue" value="\Hey Grandma... Whoa! What happened to your fake leg? # Huh? My what? # Your fake leg? Didn't you have an artificial limb? # If this is one of you're pranks, I swear I'm gonna..."/>
