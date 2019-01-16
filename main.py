@@ -89,12 +89,12 @@ class Game:
 			screen.blit(mapimg, self.camera.apply_rect(maprect))
 			for n in self.npcs:
 				screen.blit(n.image, self.camera.apply_rect(n.rect))
-			for p in self.portals:
-				draw.rect(screen, BLUE, self.camera.apply_rect(p.rect), 2)
+			# for p in self.portals:
+			# 	draw.rect(screen, BLUE, self.camera.apply_rect(p.rect), 2)
 
 			screen.blit(self.player.image, self.camera.apply(self.player))
-			for w in self.map.walls:
-				draw.rect(screen, BLACK, self.camera.apply_rect(w), 1)
+			# for w in self.map.walls:
+			# 	draw.rect(screen, BLACK, self.camera.apply_rect(w), 1)
 
 class Player:
 	def __init__(self, g):
