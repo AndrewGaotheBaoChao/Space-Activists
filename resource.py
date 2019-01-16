@@ -177,3 +177,12 @@ npc10.append(get_image(npcSheet, [7, 67, 19, 28]))
 npc10.append(transform.flip(npc10[2], True, False))
 scale(npc10, npcScale)
 npcImages.append(npc10)
+
+npcSheet = image.load('images/npcs/c11.png')
+npc11 = []
+npc11.append(get_image(npcSheet, [103, 2, 18, 30]))
+npc11.append(get_image(npcSheet, [39, 2, 18, 30]))
+npc11.append(get_image(npcSheet, [7, 33, 18, 30]))
+npc11.append(transform.flip(npc11[2], True, False))
+scale(npc11, npcScale)
+npcImages.append(npc11)

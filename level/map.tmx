@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="72">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="74">
  <tileset firstgid="1" source="../images/PkmnBlackWhiteSet.tsx"/>
  <layer id="10" name="ground" width="50" height="50">
   <data encoding="csv">
@@ -430,6 +430,13 @@
    <properties>
     <property name="dialogue" value="\Hey Dad. Have you seen my phone? # Sure, I have it right here... # \Hey! What happened to the camera? # Camera? On your phone? What're you talking about? I've never seen such a big peripheral on such a small device before! # \?"/>
     <property name="npc_name" value="Dad"/>
+   </properties>
+  </object>
+  <object id="72" name="npc" type="10" x="1007.33" y="193" width="28" height="30"/>
+  <object id="73" name="npc" type="11" x="451.333" y="545" width="28" height="30">
+   <properties>
+    <property name="dialogue" value="\Hey Grandma... Whoa! What happened to your fake leg? # Huh? My what? # Your fake leg? Didn't you have an artificial limb? # If this is one of you're pranks, I swear I'm gonna..."/>
+    <property name="npc_name" value="Grandma"/>
    </properties>
   </object>
  </objectgroup>
