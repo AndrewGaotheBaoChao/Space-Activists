@@ -119,7 +119,7 @@ npcSheet = image.load('images/npcs/c4.png')
 npc4 = []
 npc4.append(get_image(npcSheet, [71, 1, 18, 31]))
 npc4.append(get_image(npcSheet, [7, 1, 18, 31]))
-npc4.append(get_image(npcSheet, [7, 22, 19, 31]))
+npc4.append(get_image(npcSheet, [6, 33, 19, 31]))
 npc4.append(transform.flip(npc4[2], True, False))
 scale(npc4, npcScale)
 npcImages.append(npc4)
