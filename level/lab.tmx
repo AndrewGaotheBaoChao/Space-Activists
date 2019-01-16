@@ -35,6 +35,7 @@
   <object id="44" name="npc" type="4" x="96" y="288" width="28" height="30">
    <properties>
     <property name="dialogue" value="I'm Mr. Martin # Let me drive # Tid bit Thursday..."/>
+    <property name="npc_name" value="Dumb Person"/>
    </properties>
   </object>
   <object id="56" name="wall" x="48" y="648" width="485" height="16" visible="0"/>
