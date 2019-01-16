@@ -192,6 +192,7 @@
   </object>
   <object id="103" name="portal" x="352" y="792" width="94.6663" height="46.6667">
    <properties>
+    <property name="co" value="1260,620"/>
     <property name="location" value="map"/>
    </properties>
   </object>
