@@ -30,7 +30,7 @@ class Game:
 		self.load_files("level/map.tmx")
 
 	def load_files(self, map_file):
-		self.map = TiledMap(map_file) 
+		self.map = TiledMap(map_file)
 		self.camera = Camera(self.map.width, self.map.height)
 		self.npcs = []
 		self.walls = []
@@ -179,7 +179,8 @@ class Player:
 				if self.rect.colliderect(p.rect):
 					g.load_files(p.path)
 					if p.co:
-						player.rect.center = p.co
+						g.player.x = p.co[0]
+						g.player.y = p.co[1]
 
 		self.determine_image()
 
