@@ -80,7 +80,7 @@ class Game:
 		if self.player.talking and self.player.talking_to != None:
 			screen.blit(self.player.background, (0, 0))
 			self.player.talking_to.talk()
-			draw.rect(screen, GREEN, self.camera.apply_rect(self.player.talking_to.rect), 5)
+			# draw.rect(screen, GREEN, self.camera.apply_rect(self.player.talking_to.rect), 5)
 		else:
 			mapimg = self.map.make_map(self.camera.camera)
 			maprect = mapimg.get_rect()
@@ -187,15 +187,34 @@ class NPC:
 		self.rect = self.image.get_rect()
 		self.rect.center = obj.x, obj.y
 
+		self.name = obj.npc_name
 		self.dialogue = obj.dialogue.split(" # ")
+		for i in range(len(self.dialogue)):
+			if self.dialogue[i][0] == "\\":
+				self.dialogue[i] = "ME: " + self.dialogue[i][1:]
+			else:
+				self.dialogue[i] = self.name.upper() + ": " + self.dialogue[i]
 		self.index = 0
 		self.page = 0
 		self.delay = 0
 		self.delayMax = 2
+		self.dir = "down"
 
 	def update(self, g):
-		# Rotate towards the player
-		pass
+		dx = g.player.rect.centerx - self.rect.centerx
+		dy = g.player.rect.centery - self.rect.centery
+		ang = degrees(atan2(dy, dx))
+		if ang < 0: ang += 360
+		if 45 < ang < 135:
+			self.dir = "down"
+		elif 135 < ang < 225:
+			self.dir = "left"
+		elif 225 < ang < 315:
+			self.dir = "up"
+		else:
+			self.dir = "right"
+		print(ang)
+		self.image = self.images["down up left right".split(" ").index(self.dir)]
 
 	def talk(self):
 		# Continue scrolling as there us still text to be revealed
