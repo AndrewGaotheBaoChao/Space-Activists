@@ -285,7 +285,7 @@ class Portal:
 			self.co = obj.co.split(",")
 			self.co = [int(self.co[0]), int(self.co[1])]
 		except: self.co = []
-interact = False
+
 click = False
 advance = False
 g = Game()
