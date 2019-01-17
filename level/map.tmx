@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="74">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="77">
  <tileset firstgid="1" source="../images/PkmnBlackWhiteSet.tsx"/>
  <layer id="10" name="ground" width="50" height="50">
   <data encoding="csv">
@@ -426,9 +426,9 @@
     <property name="location" value="lab"/>
    </properties>
   </object>
-  <object id="71" name="npc" type="3" x="640.667" y="193" width="28" height="30">
+  <object id="71" name="npc" type="3" x="1058" y="258.333" width="28" height="30">
    <properties>
-    <property name="dialogue" value="\Hey Dad. Have you seen my phone? # Sure, I have it right here... # \Hey! What happened to the camera? # Camera? On your phone? What're you talking about? I've never seen such a big peripheral on such a small device before! # \?"/>
+    <property name="dialogue" value="\Hey Dad. Have you seen my cellphone? # Cell-phone? What's that? # \Very funny... Nevermind, I found it in my pocket. Wait... where's the camera?# Pffft! A camera? Where are you gonna fit it on that small thing? Are you feeling okay...?"/>
     <property name="npc_name" value="Dad"/>
    </properties>
   </object>
@@ -436,6 +436,24 @@
    <properties>
     <property name="dialogue" value="\Hey Grandma... Whoa! What happened to your fake leg? # Huh? My what? # Your fake leg? Didn't you have an artificial limb? # If this is one of you're pranks, I swear I'm gonna..."/>
     <property name="npc_name" value="Grandma"/>
+   </properties>
+  </object>
+  <object id="74" name="npc" type="7" x="640.667" y="194.333" width="28" height="30">
+   <properties>
+    <property name="dialogue" value="Hey! How's it going bro? # \This is so weird... Do you have reception your cellphone? # Phone? Like a land-line?"/>
+    <property name="npc_name" value="Brother"/>
+   </properties>
+  </object>
+  <object id="75" name="npc" type="9" x="672.667" y="735.667" width="28" height="30">
+   <properties>
+    <property name="dialogue" value="Welcome to Smallville!"/>
+    <property name="npc_name" value="Handong"/>
+   </properties>
+  </object>
+  <object id="76" name="npc" type="5" x="699.333" y="1065" width="28" height="30">
+   <properties>
+    <property name="dialogue" value="\Hey, wasn't this lamp post an LED light? # L-E-D? Ummmmm, I guess...? I thought they were the standard incandescent..."/>
+    <property name="npc_name" value="Jagraj"/>
    </properties>
   </object>
  </objectgroup>

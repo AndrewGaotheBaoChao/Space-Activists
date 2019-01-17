@@ -260,7 +260,7 @@ class NPC:
 		# width for the speech box at the bottom of the screen
 		w = width-100
 		# Speech box
-		boxR = Rect((width-w)/2, height - 200, w, 190)
+		boxR = Rect((width-w)/2, height - 216, w, 184)
 
 		# Drawing the box
 		screen.blit(textbox, (0, 0))
