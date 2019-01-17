@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="77">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="79">
  <tileset firstgid="1" source="../images/PkmnBlackWhiteSet.tsx"/>
  <layer id="10" name="ground" width="50" height="50">
   <data encoding="csv">
@@ -380,7 +380,7 @@
 </data>
  </layer>
  <objectgroup id="18" name="walls">
-  <object id="2" name="spawn" x="1226.67" y="168" width="48" height="32"/>
+  <object id="2" name="spawn" x="1228" y="186.667" width="48" height="32"/>
   <object id="12" name="wall" x="997.333" y="1024" width="154.667" height="146"/>
   <object id="13" name="wall" x="1349.33" y="694.667" width="248" height="476"/>
   <object id="14" name="wall" x="720" y="704" width="480" height="128"/>
@@ -428,7 +428,7 @@
   </object>
   <object id="71" name="npc" type="3" x="1058" y="258.333" width="28" height="30">
    <properties>
-    <property name="dialogue" value="\Hey Dad. Have you seen my cellphone? # Cell-phone? What's that? # \Very funny... Nevermind, I found it in my pocket. Wait... where's the camera?# Pffft! A camera? Where are you gonna fit it on that small thing? Are you feeling okay...?"/>
+    <property name="dialogue" value="\Hey Dad. Have you seen my cellphone? # Cell-phone? What's that? # \Very funny... Nevermind, I found it in my pocket. Wait... where's the camera? # Pffft! A camera? Where are you gonna fit it on that small thing? Are you feeling okay...?"/>
     <property name="npc_name" value="Dad"/>
    </properties>
   </object>
@@ -454,6 +454,17 @@
    <properties>
     <property name="dialogue" value="\Hey, wasn't this lamp post an LED light? # L-E-D? Ummmmm, I guess...? I thought they were the standard incandescent..."/>
     <property name="npc_name" value="Jagraj"/>
+   </properties>
+  </object>
+  <object id="77" name="npc" type="4" x="831.333" y="1197" width="28" height="30">
+   <properties>
+    <property name="dialogue" value="I hope the Smallville Senates did good... They had a basketball game this morning with the Toronto Raptors. # \Why don't you just look up the score online? # Online? I'm gonna have to wait 'till tomorrow to see the score in the paper..."/>
+    <property name="npc_name" value="Danny"/>
+   </properties>
+  </object>
+  <object id="78" name="portal" x="1215.33" y="99.3333" width="33.333" height="38.6667">
+   <properties>
+    <property name="location" value="home"/>
    </properties>
   </object>
  </objectgroup>
